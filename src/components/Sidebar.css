@@ -51,3 +51,7 @@
 .app-sidebar-note:hover {
   background-color: #eaeaea;
 }
+
+.app-sidebar-note.active {
+  background-color: #eaeaea;
+}
