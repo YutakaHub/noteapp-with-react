@@ -28,6 +28,24 @@ const onDeleteNote = (id) => {
   setNotes(filterNotes);
 }
 
+//AcitiveなNoteの内容を取得する。
+const getActiveNote = () => {
+  return notes.find((note) => note.id === activeNote);
+}
+
+const onUpdateNote = (updatedNotes) => {
+//修正された新しいノートの配列を返す
+const updatedNotesArray = notes.map((note) => {
+  if(note.id === updatedNotes.id){
+    return updatedNotes;
+  } else {
+    return note;
+  }
+  setNotes(updatedNotesArray);
+})
+
+}
+
   return (
     <>
       <div className="App">
@@ -37,7 +55,7 @@ const onDeleteNote = (id) => {
         activeNote={activeNote}
         setActiveNote={setActiveNote}
         notes={notes}/>
-        <Main />
+        <Main activeNote={getActiveNote()}/>
       </div>
     </>
   )
