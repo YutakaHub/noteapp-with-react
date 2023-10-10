@@ -41,9 +41,8 @@ const updatedNotesArray = notes.map((note) => {
   } else {
     return note;
   }
-  setNotes(updatedNotesArray);
-})
-
+});
+setNotes(updatedNotesArray);
 }
 
   return (
@@ -55,7 +54,7 @@ const updatedNotesArray = notes.map((note) => {
         activeNote={activeNote}
         setActiveNote={setActiveNote}
         notes={notes}/>
-        <Main activeNote={getActiveNote()}/>
+        <Main activeNote={getActiveNote()} onUpdateNote={onUpdateNote}/>
       </div>
     </>
   )
