@@ -1,12 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 import Main from './components/Main'
 import Sidebar from './components/Sidebar'
 import uuid from 'react-uuid';
 
 function App() {
-  const[notes, setNotes] = useState([]);
+  const[notes, setNotes] = useState(JSON.parse(localStorage.getItem("notes")) || []);
   const[activeNote, setActiveNote] = useState(false);
+
+  useEffect(() => {
+    //ローカルストレージにノートを保存する。
+    localStorage.setItem("notes",JSON.stringify(notes))
+  },[notes])
+
+  useEffect(() => {
+    //先頭のノートをアクティブにする。空の場合、セットしない。
+    console.log(notes.length);
+    if(notes.length!==0){
+      setActiveNote(notes[0].id);
+    }
+  },[])
 
   //Note追加
   const onAddNote = () => {
@@ -14,7 +27,7 @@ function App() {
     const newNote = {
       id: uuid(),
       title: "新しいノート",
-      content: "新しいノートの内容",
+      content: "",
       modDate: Date.now(),
     };
     setNotes([...notes,newNote]);
